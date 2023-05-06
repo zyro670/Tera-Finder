@@ -107,19 +107,14 @@ public static class GridUtil
                     {
                         try
                         {
-                            var columnCount = dataGrid.Columns.Count;
-                            var columnNames = "";
                             var outputTxt = new string[count + 1];
-                            for (var i = 0; i < columnCount; i++)
-                                columnNames += dataGrid.Columns[i].HeaderText.ToString() + "\t";
-                            outputTxt[0] += columnNames;
 
                             for (var i = 0; i < count; i++)
-                                for (var j = 0; j < columnCount; j++)
-                                    if (count > 1 && int.Parse(selectedRows.ElementAt(0).Cells[columnCount-1].Value.ToString()!) > int.Parse(selectedRows.ElementAt(1).Cells[columnCount-1].Value.ToString()!))
-                                        outputTxt[i + 1] += Convert.ToString(selectedRows.ElementAt(count - (i + 1)).Cells[j].Value) + "\t";
+                                for (var j = 0; j < 28; j++)
+                                    if (count > 1 && int.Parse(selectedRows.ElementAt(0).Cells[28-1].Value.ToString()!) > int.Parse(selectedRows.ElementAt(1).Cells[28-1].Value.ToString()!))
+                                        outputTxt[i + 1] += Convert.ToString(selectedRows.ElementAt(count - (i + 1)).Cells[j].Value) + ",";
                                     else
-                                        outputTxt[i + 1] += Convert.ToString(selectedRows.ElementAt(i).Cells[j].Value) + "\t";
+                                        outputTxt[i + 1] += Convert.ToString(selectedRows.ElementAt(i).Cells[j].Value) + ",";
 
                             File.WriteAllLines(sfd.FileName, outputTxt, Encoding.UTF8);
                             MessageBox.Show($"{strings["GridUtil.Exported"]} {sfd.FileName}");
